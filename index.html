@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharath M — Developer Portfolio</title>
+  <meta name="description" content="Sharath M — Full-Stack Developer, AI Engineer & Data Analyst. Explore my projects, skills, and journey." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- Canvas for Three.js Particle Field -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Floating Background Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <span class="logo-bracket">&lt;</span>SM<span class="logo-bracket">/&gt;</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#about" data-nav>About</a></li>
+      <li><a href="#skills" data-nav>Skills</a></li>
+      <li><a href="#education" data-nav>Education</a></li>
+      <li><a href="#projects" data-nav>Projects</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <!-- Floating tech badges -->
+    <div class="hero-float-badge">⚡ LangChain</div>
+    <div class="hero-float-badge">🤖 AI / ML</div>
+    <div class="hero-float-badge">⚛️ React</div>
+    <div class="hero-float-badge">🐳 Docker</div>
+    <!-- Portrait at corner -->
+    <img src="assets/sharath_new.jpg" alt="Sharath M" class="hero-portrait">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-greeting">Hello, World! I'm</p>
+      <h1 class="hero-name">Sharath M</h1>
+      <div class="hero-typewriter">
+        <span class="typewriter-text" id="typewriter"></span>
+        <span class="typewriter-cursor">|</span>
+      </div>
+      <p class="hero-bio">Information Science undergraduate building AI-driven solutions and full-stack experiences that matter.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-ghost">Let's Talk</a>
+      </div>
+      <div class="hero-socials">
+        <a href="https://github.com/SHARATH204-MAX/" target="_blank" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/sharath-m-67427429a/" target="_blank" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://leetcode.com/u/SHARATH_M_06/" target="_blank" aria-label="LeetCode">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+        </a>
+        <a href="mailto:shm23csds@cmrit.ac.in" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Scroll to explore</span>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-tag">01 / About</div>
+      <h2 class="section-title reveal">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>Motivated <strong>Information Science undergraduate</strong> at CMR Institute of Technology, Bengaluru, with a CGPA of <strong>8.96</strong>. I have strong foundations in Data Structures, Algorithms, and Object-Oriented Programming.</p>
+          <p>Passionate about building <strong>AI-driven solutions</strong> and data analytics systems. I bridge the gap between complex problem domains and elegant, performant software.</p>
+          <p>Beyond code, I represent CMRIT at the VTU level in KHO-KHO and Kabaddi, organize NSS camps, and hold the <strong>Rajya Puraskar</strong> from Bharat Scouts and Guides.</p>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num" data-count="8.96">0</span><span class="stat-label">CGPA</span></div>
+            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Projects</span></div>
+            <div class="stat"><span class="stat-num" data-count="4">0</span><span class="stat-label">Languages</span></div>
+            <div class="stat"><span class="stat-num" data-count="2">0</span><span class="stat-label">Awards</span></div>
+          </div>
+        </div>
+        <div class="about-card reveal">
+          <div class="terminal-window animated-border">
+            <div class="terminal-header">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="terminal-title">sharath.json</span>
+            </div>
+            <pre class="terminal-body"><code>{
+  <span class="key">"name"</span>: <span class="val">"Sharath M"</span>,
+  <span class="key">"role"</span>: <span class="val">"Full-Stack Developer"</span>,
+  <span class="key">"location"</span>: <span class="val">"Bengaluru, India"</span>,
+  <span class="key">"education"</span>: <span class="val">"B.E. ISE, CMRIT"</span>,
+  <span class="key">"cgpa"</span>: <span class="val">8.96</span>,
+  <span class="key">"interests"</span>: [
+    <span class="val">"AI / ML"</span>,
+    <span class="val">"Full-Stack Dev"</span>,
+    <span class="val">"Data Analytics"</span>,
+    <span class="val">"Open Source"</span>
+  ],
+  <span class="key">"available"</span>: <span class="bool">true</span>
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-tag">02 / Skills</div>
+      <h2 class="section-title reveal">Technical Arsenal</h2>
+      <div class="skills-grid">
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">⚡</div>
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">🎨</div>
+          <h3>Frontend</h3>
+          <div class="skill-tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">⚙️</div>
+          <h3>Backend</h3>
+          <div class="skill-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Express.js</span>
+            <span class="tag">Socket.IO</span>
+            <span class="tag">REST APIs</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">🗄️</div>
+          <h3>Databases</h3>
+          <div class="skill-tags">
+            <span class="tag">MongoDB</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">🤖</div>
+          <h3>AI / ML</h3>
+          <div class="skill-tags">
+            <span class="tag">LangChain</span>
+            <span class="tag">LLMs</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Streamlit</span>
+            <span class="tag">NumPy</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">🛠️</div>
+          <h3>Tools &amp; Cloud</h3>
+          <div class="skill-tags">
+            <span class="tag">Git</span>
+            <span class="tag">Docker</span>
+            <span class="tag">AWS EC2</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Linux</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">📊</div>
+          <h3>Data Viz</h3>
+          <div class="skill-tags">
+            <span class="tag">Tableau</span>
+            <span class="tag">Power BI</span>
+          </div>
+        </div>
+        <div class="skill-category tilt-card">
+          <div class="skill-icon">🧠</div>
+          <h3>Core CS</h3>
+          <div class="skill-tags">
+            <span class="tag">DSA</span>
+            <span class="tag">OOP</span>
+            <span class="tag">DBMS</span>
+            <span class="tag">OS</span>
+            <span class="tag">Networks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <div class="container">
+      <div class="section-tag">03 / Education</div>
+      <h2 class="section-title reveal">Academic Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">2023 – 2027</span>
+            <h3>Bachelor of Engineering</h3>
+            <h4>Information Science &amp; Engineering</h4>
+            <p>CMR Institute of Technology, Bengaluru</p>
+            <div class="timeline-badge">CGPA: 8.96</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">2020 – 2022</span>
+            <h3>Pre-University Course</h3>
+            <h4>Science Stream</h4>
+            <p>SRS PU College, Chitradurga</p>
+            <div class="timeline-badge">87%</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-year">2020</span>
+            <h3>Secondary School (10th Grade)</h3>
+            <h4>SSLC</h4>
+            <p>Vidya Vikas Vidya Samasthe, Chitradurga</p>
+            <div class="timeline-badge">95%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <div class="section-tag">04 / Projects</div>
+      <h2 class="section-title reveal">What I've Built</h2>
+      <div class="projects-grid">
+
+        <article class="project-card tilt-card" id="proj-1">
+          <div class="project-glow"></div>
+          <div class="project-number">01</div>
+          <div class="project-content">
+            <img src="project1_image_1789772359226.jpg" alt="AI Voice Query Generator" class="project-image"/>
+            <h3>AI-Based Voice &amp; Text Enabled Automated Query Generator</h3>
+            <p>Intelligent web app that converts voice and text inputs into optimized SQL queries using AI-powered language models. Designed an NLP pipeline and integrated speech recognition for seamless human-computer interaction.</p>
+            <div class="project-stack">
+              <span>Streamlit</span>
+              <span>LangChain</span>
+              <span>LLMs</span>
+              <span>Python</span>
+              <span>Speech Recognition</span>
+              <span>MySQL</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/SHARATH204-MAX/" target="_blank" class="proj-link">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project-card tilt-card" id="proj-2">
+          <div class="project-glow"></div>
+          <div class="project-number">02</div>
+          <div class="project-content">
+            <img src="project2_image_1789772376884.jpg" alt="Real-Time Collaborative Code Editor" class="project-image"/>
+            <h3>Real-Time Collaborative Code Editor using CRDTs</h3>
+            <p>Real-time collaborative code editor supporting simultaneous multi-user editing, live presence awareness, and shared document sync. Engineered conflict-free collaboration using Yjs (CRDTs). Containerised with Docker and deployed on AWS EC2.</p>
+            <div class="project-stack">
+              <span>React</span>
+              <span>Node.js</span>
+              <span>Socket.IO</span>
+              <span>Yjs</span>
+              <span>Monaco</span>
+              <span>Docker</span>
+              <span>AWS EC2</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/SHARATH204-MAX/" target="_blank" class="proj-link">GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project-card tilt-card" id="proj-3">
+          <div class="project-glow"></div>
+          <div class="project-number">03</div>
+          <div class="project-content">
+            <img src="project3_image_1789772413329.jpg" alt="Student Accuracy Prediction System" class="project-image"/>
+            <h3>Student Accuracy Prediction System</h3>
+            <p>ML-based web app predicting student academic performance from historical data. Implemented Decision Tree, Random Forest, and Polynomial Regression with data preprocessing, feature engineering, and model evaluation.</p>
+            <div class="project-stack">
+              <span>Python</span>
+              <span>Streamlit</span>
+              <span>Scikit-learn</span>
+              <span>NumPy</span>
+            </div>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/SHARATH204-MAX/" target="_blank" class="proj-link">GitHub →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section" id="achievements">
+    <div class="container">
+      <div class="section-tag">05 / Achievements</div>
+      <h2 class="section-title reveal">Milestones &amp; Awards</h2>
+      <div class="achievements-grid">
+        <div class="achievement-card tilt-card">
+          <span class="ach-icon">🏆</span>
+          <h3>Best Mini Project Award</h3>
+          <p>Awarded Best Mini Project in 1st Semester for "Accident Detection System in Bikes"</p>
+        </div>
+        <div class="achievement-card tilt-card">
+          <span class="ach-icon">🎖️</span>
+          <h3>Rajya Puraskar</h3>
+          <p>Awarded the prestigious Rajya Puraskar from Bharat Scouts and Guides</p>
+        </div>
+        <div class="achievement-card tilt-card">
+          <span class="ach-icon">🏃</span>
+          <h3>VTU Level Sports</h3>
+          <p>Represented CMRIT in VTU-level KHO-KHO twice. Active Kabaddi player and 400m/800m athlete</p>
+        </div>
+        <div class="achievement-card tilt-card">
+          <span class="ach-icon">💡</span>
+          <h3>IEEE Hackathon</h3>
+          <p>Participated in the Rapid Innovation Challenge organised by IEEE Young Professionals Board</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="section-tag">06 / Contact</div>
+      <h2 class="section-title reveal">Let's Build Together</h2>
+      <p class="contact-intro reveal">I'm actively looking for Software Development / Data Analyst internships. If you have an exciting opportunity or just want to connect — let's talk!</p>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <a href="mailto:shm23csds@cmrit.ac.in" class="contact-item reveal">
+            <span class="contact-icon">📧</span>
+            <div>
+              <strong>Email</strong>
+              <span>shm23csds@cmrit.ac.in</span>
+            </div>
+          </a>
+          <a href="tel:+919731276655" class="contact-item reveal">
+            <span class="contact-icon">📱</span>
+            <div>
+              <strong>Phone</strong>
+              <span>+91 9731276655</span>
+            </div>
+          </a>
+          <div class="contact-item reveal">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Location</strong>
+              <span>Bengaluru, Karnataka, India</span>
+            </div>
+          </div>
+          <a href="https://www.linkedin.com/in/sharath-m-67427429a/" target="_blank" class="contact-item reveal">
+            <span class="contact-icon">💼</span>
+            <div>
+              <strong>LinkedIn</strong>
+              <span>sharath-m-67427429a</span>
+            </div>
+          </a>
+        </div>
+        <div class="contact-cta-box reveal">
+          <p>Open to internships, collaborations, and interesting projects.</p>
+          <a href="mailto:shm23csds@cmrit.ac.in" class="btn btn-primary btn-large">Send Me an Email</a>
+          <a href="https://github.com/SHARATH204-MAX/" target="_blank" class="btn btn-ghost btn-large">GitHub Profile</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo"><span class="logo-bracket">&lt;</span>SM<span class="logo-bracket">/&gt;</span></div>
+        <p>Crafted with ❤️ by Sharath M &nbsp;·&nbsp; Bengaluru, India</p>
+        <div class="footer-links">
+          <a href="https://github.com/SHARATH204-MAX/" target="_blank">GitHub</a>
+          <a href="https://www.linkedin.com/in/sharath-m-67427429a/" target="_blank">LinkedIn</a>
+          <a href="https://leetcode.com/u/SHARATH_M_06/" target="_blank">LeetCode</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
