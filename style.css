@@ -1075,6 +1075,38 @@ ul { list-style: none; }
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* ---- Toast Notification ----------------------------------- */
+.toast-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--clr-surface2);
+  border: 1px solid var(--clr-primary);
+  color: var(--clr-heading);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--glow-blue);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.toast-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast-icon {
+  font-size: 1.2rem;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(36px);

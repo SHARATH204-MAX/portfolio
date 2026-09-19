@@ -417,3 +417,36 @@
   });
 })();
 
+/* =====================================================
+   14. MAILTO & EMAIL COPY TO CLIPBOARD WITH TOAST
+   ===================================================== */
+(function () {
+  function showToast(message) {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast-notification';
+      toast.className = 'toast-notification';
+      toast.innerHTML = `<span class="toast-icon">📧</span><span class="toast-text"></span>`;
+      document.body.appendChild(toast);
+    }
+    toast.querySelector('.toast-text').textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const email = link.getAttribute('href').replace('mailto:', '');
+      if (navigator.clipboard && email) {
+        navigator.clipboard.writeText(email).then(() => {
+          showToast(`Email address (${email}) copied to clipboard! Opening mail app...`);
+        }).catch(() => {
+          showToast(`Opening email application for ${email}...`);
+        });
+      }
+    });
+  });
+})();
+
+
