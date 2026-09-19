@@ -386,3 +386,34 @@
 
   sections.forEach(s => obs.observe(s));
 })();
+
+/* =====================================================
+   13. DARK / LIGHT THEME TOGGLE
+   ===================================================== */
+(function () {
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (!toggleBtn) return;
+  const icon = toggleBtn.querySelector('.theme-icon');
+
+  // Check stored theme or default to dark
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+  if (storedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    if (icon) icon.textContent = '☀️';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (icon) icon.textContent = '🌙';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    if (icon) {
+      icon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+    }
+  });
+})();
+
