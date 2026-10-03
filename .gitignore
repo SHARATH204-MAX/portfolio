@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Local QA / scratch scripts
+check2.js
+*.log
+
+# Source resume (byte-identical to the served assets/sharath-m-resume.pdf)
+1CR23IS204-SHARATH M-RESUME-Final.pdf
+
+# Build output
+dist/
+build/
+.vercel/

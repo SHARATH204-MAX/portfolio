@@ -29,7 +29,7 @@
   animateRing();
 
   // Enlarge ring on hoverable elements
-  const hoverEls = document.querySelectorAll('a, button, .btn, .skill-category, .project-card, .achievement-card, .tag');
+  const hoverEls = document.querySelectorAll('a, button, .btn, .skill-category, .project-card, .achievement-card, .tag, .contact-item, .stat');
   hoverEls.forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hover'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
@@ -58,6 +58,12 @@
 (function () {
   const canvas = document.getElementById('three-canvas');
   if (!canvas || typeof THREE === 'undefined') return;
+
+  // Respect users who prefer reduced motion — skip the heavy particle field.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
 
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -160,11 +166,11 @@
   const el = document.getElementById('typewriter');
   if (!el) return;
   const phrases = [
+    'AI & Data Science Engineer',
     'Full-Stack Developer',
-    'AI Engineer',
+    'LLM Application Developer',
+    'ML Engineer',
     'Data Analyst',
-    'Problem Solver',
-    'Open Source Builder',
   ];
   let pi = 0, ci = 0, deleting = false;
   function type() {
@@ -190,6 +196,10 @@
   if (toggle && links) {
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+    // Close the mobile menu on Escape for keyboard users
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') links.classList.remove('open');
+    });
   }
 })();
 
@@ -201,7 +211,7 @@
   const staggerGroups = [
     '.skill-category',
     '.achievement-card',
-    '.contact-item',
+    '.channel-card',
   ];
   staggerGroups.forEach(sel => {
     document.querySelectorAll(sel).forEach((el, i) => {
@@ -307,23 +317,31 @@
 
 /* =====================================================
    10. HERO MOUSE PARALLAX (portrait depth layer)
+
+   Uses the independent `translate`/`rotate` properties instead of
+   `transform`, because `transform` is owned by the CSS entrance/float
+   animations here and inline values on it are simply ignored.
    ===================================================== */
 (function () {
   const portrait = document.querySelector('.hero-portrait');
   const badges   = document.querySelectorAll('.hero-float-badge');
   if (!portrait) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   window.addEventListener('mousemove', e => {
     const mx = (e.clientX / window.innerWidth  - 0.5);
     const my = (e.clientY / window.innerHeight - 0.5);
 
-    portrait.style.transform  = `translate(${mx * -18}px, ${my * -10}px)`;
-    portrait.style.transition = 'transform 0.25s ease-out';
+    // `translate: 0 -50%` on .hero-portrait is what centres it vertically,
+    // so the parallax offset has to be composed with it rather than replace it.
+    portrait.style.translate  = `${(mx * -18).toFixed(2)}px calc(-50% + ${(my * -10).toFixed(2)}px)`;
+    portrait.style.transition = 'translate 0.25s ease-out';
 
     badges.forEach((b, i) => {
       const depth = (i + 1) * 0.4;
-      b.style.transform  = `translate(${mx * 28 * depth}px, ${my * 16 * depth}px) rotate(${mx * 3}deg)`;
-      b.style.transition = 'transform 0.3s ease-out';
+      b.style.translate  = `${(mx * 28 * depth).toFixed(2)}px ${(my * 16 * depth).toFixed(2)}px`;
+      b.style.rotate     = `${(mx * 3).toFixed(2)}deg`;
+      b.style.transition = 'translate 0.3s ease-out, rotate 0.3s ease-out';
     });
   }, { passive: true });
 })();
@@ -447,6 +465,66 @@
       }
     });
   });
+})();
+
+/* =====================================================
+   15. CONTACT — COPY BUTTONS + LIVE IST CLOCK
+   ===================================================== */
+(function () {
+  // --- Copy-to-clipboard buttons ---
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const value = btn.getAttribute('data-copy');
+      if (!value) return;
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        ta.remove();
+      }
+      btn.classList.add('copied');
+      clearTimeout(btn._t);
+      btn._t = setTimeout(() => btn.classList.remove('copied'), 1800);
+    });
+  });
+
+  // --- Live clock (Asia/Kolkata) ---
+  const clock = document.getElementById('ist-clock');
+  if (clock) {
+    try {
+      const fmt = new Intl.DateTimeFormat('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit', minute: '2-digit', hour12: true
+      });
+      const tick = () => { clock.textContent = fmt.format(new Date()).toUpperCase(); };
+      tick();
+      setInterval(tick, 15000);
+    } catch (e) {
+      clock.textContent = 'IST';
+    }
+  }
+})();
+
+/* =====================================================
+   16. SKILLS — DUPLICATE LOGO MARQUEE FOR SEAMLESS LOOP
+   ===================================================== */
+(function () {
+  const track = document.querySelector('.tech-marquee-track');
+  if (!track || track.dataset.cloned === '1') return;
+  const original = Array.from(track.children);
+  // Exactly one duplicate pass: -50% then lands on the identical frame.
+  original.forEach(node => {
+    const clone = node.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+  track.dataset.cloned = '1';
 })();
 
 
